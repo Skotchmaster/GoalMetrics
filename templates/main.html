@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Главная страница
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="controls">
+    <input type="date" id="searchDate">
+    <button onclick="navigateByDate()">Найти матчи на дату</button>
+</div>
+</div>
+
+<div class="matches-container">
+    {% if grouped_matches %}
+    <div class="matches-container">
+
+    {% for competition, matches in grouped_matches.items() %}
+        <div class="tour-header">{{ competition }}</div>
+
+        {% for match in matches %}
+            <div class="match">
+                <span class="date">{{ match.дата }}</span>
+                <div class="match-info">
+                    <div class="team left-team">
+                        <img src="{{ match.эмблема_первой_комады }}" alt="{{ match.первая_команда }}">
+                        <span>{{ match.первая_команда }}</span>
+                    </div>
+
+                    <span class="score">{{ match.счет }}</span>
+
+                    <div class="team right-team">
+                        <span>{{ match.вторая_команда }}</span>
+                        <img src="{{ match.эмблема_второй_команды }}" alt="{{ match.вторая_команда }}">
+                    </div>
+                </div>
+                <span class="tour" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 12px;">
+                    {{ match.тур }}
+                </span>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    </div>
+    {% else %}
+    <h2>На данную дату нет данных</h2>
+    {% endif %}
+</div>
+
+<script>
+
+    function navigateByDate() {
+        const date = document.getElementById('searchDate').value;
+        if (!date) return;
+
+        window.location.href = `/main_page/${date}`;
+    }
+
+    setInterval(function() {
+        location.reload();
+    }, 120000);
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport"
+			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet"
+			href="{{ url_for('static', filename='css/main.css')}}">
+		<link rel="icon" href="static/img/logo.jpg" type="image/x-icon">
+		<title>{% block title %}{% endblock %}</title>
+	</head>
+	<body>
+		<header class="header">
+			<div class="logo">
+				<a href="{{ url_for('index') }}">
+					<img src="{{ url_for('static', filename='img/hat_logo.png') }}"
+						alt="GoalMetrics">
+				</a>
+			</div>
+			<div class="container">
+				<nav class="menu">
+					<ul>
+						<li><a href="{{ url_for('league', competition='российская премьер-лига') }}">РПЛ</a></li>
+						<li><a href="{{ url_for('league', competition='премьер-лига') }}">АПЛ</a></li>
+						<li><a href="{{ url_for('league', competition='примера') }}">Ла Лига</a></li>
+						<li><a href="{{ url_for('league', competition='серия а') }}">Серия А</a></li>
+						<li><a href="{{ url_for('league', competition='бундеслига') }}">Бундеслига</a></li>
+						<li><a href="{{ url_for('league', competition='лига чемпионов уефа') }}">Лига чемпионов</a></li>
+						<li><a href="{{ url_for('league', competition='чемпионат мира') }}">ЧМ</a></li>
+                        <li><a href="{{ url_for('league', competition='чемпионат европы') }}">Евро</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		{% block body %}{% endblock %}
+	</body>
+</html>

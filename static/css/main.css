@@ -1,0 +1,323 @@
+body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+}
+
+.container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+}
+
+.header {
+      background-color: #d94537;
+      color: #fff;
+      padding: 15px 0;
+      position: relative;
+}
+
+.logo {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.menu {
+    white-space: nowrap;
+    margin-left: auto
+}
+
+.menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 10px;
+      display: flex;
+      flex-wrap: nowrap;
+}
+
+.menu ul li {
+      margin: 0 15px;
+      position: relative;
+      white-space: nowrap;
+}
+
+
+.menu ul li:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -15px;
+      transform: translateY(-50%);
+      height: 60%;
+      width: 1px;
+      background-color: #fff;
+}
+
+.menu ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 20px;
+      transition: color 0.3s ease;
+      padding: 10px 0;
+      display: block;
+}
+
+.menu ul li a:hover {
+      color: #a2a2a2;
+}
+
+.matches-container {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.tour-header {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin: 20px 0 10px 0;
+    border-radius: 5px;
+}
+
+.match {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+.match .date {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #818181;
+    font-size: 12px;
+}
+
+.match-info {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+}
+
+.match-info .team {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.match-info .left-team {
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.match-info .right-team {
+    justify-content: flex-start;
+    flex: 1;
+}
+
+.match-info .score {
+    flex: 0;
+    font-weight: bold;
+    margin: 0 20px;
+}
+
+.match-info img {
+    vertical-align: middle;
+}
+
+.match .tour {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #666;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+a:hover {
+    color: #818181;
+}
+
+.all_results {
+    margin-top: 20px;
+}
+
+.years-info {
+    width: 100%;
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+    gap: 20px;
+}
+.years-info img {
+    vertical-align: middle;
+}
+
+.years-info span {
+    align-items: center;
+    gap: 10px;
+    display: inline-block;
+    width: 25%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    border: 0 solid #ccc;
+    text-align: left;
+}
+
+.results-table {
+    width: 85%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.results-table th, .results-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.results-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.results-table img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.results-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.results-table td:first-child, .results-table th:first-child {
+    text-align: left;
+}
+
+.results-table td:not(:first-child), .results-table th:not(:first-child) {
+    text-align: center;
+}
+
+.team-info {
+    text-align: left;
+}
+
+/* Контейнер календаря */
+.sc-container {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+/* Элементы управления */
+.sc-controls {
+    margin: 15px 0;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.sc-controls input[type="month"],
+.sc-controls input[type="date"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.sc-controls button {
+    padding: 8px 16px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Таблица календаря */
+.sc-calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.sc-calendar-table th {
+    background: #f8f9fa;
+    color: #333;
+    padding: 12px;
+    border: 1px solid #dee2e6;
+    font-weight: 600;
+}
+
+.sc-calendar-table td {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    position: relative;
+}
+
+/* Дни */
+.sc-day-link {
+    display: block;
+    color: #212529;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.sc-day-link:hover {
+    background: #e9ecef;
+}
+
+/* Выходные */
+.sc-weekend {
+    background: #fff5f5;
+}
+.sc-weekend .sc-day-link {
+    color: #dc3545;
+}
+
+/* Текущий день */
+.sc-current-day {
+    background: #4CAF50;
+    color: white !important;
+}
+
+/* Заголовок месяца */
+.sc-month-title {
+    color: #2c3e50;
+    text-align: center;
+    margin: 15px 0;
+    font-size: 1.5em;
+}

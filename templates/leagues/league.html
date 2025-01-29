@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ league }}
+{% endblock %}
+
+{% block body %}
+<div style="text-align: center;">
+    <h1>{{ league }} результаты</h1>
+</div>
+
+<div class="all_results">
+    <table class="results-table">
+        <thead>
+            <tr>
+                <th>Год</th>
+                <th>Первое место</th>
+                <th>Второе место</th>
+                <th>Третье место</th>
+                <th>Четвертое место</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for year in teams %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('show_year', year=year|replace('/', '-'), league=league) }}">
+                        {{ year }}
+                    </a>
+                </td>
+                {% for i in range(4) %}
+                <td>
+                    {% if teams[year][i][1] %}
+                    <div class="team-info">
+                        <img src="{{ teams[year][i][0] }}" alt="{{ teams[year][i][1] }}" width="20">
+                        <span>{{ teams[year][i][1] }}</span>
+                    </div>
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
