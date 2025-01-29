@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Регистрация
+{% endblock %}
+
+{% block body %}
+
+<h2>Привет, {{ user.username }}!</h2>
+    <p>Добро пожаловать в ваш личный кабинет.</p>
+    <a href="{{ url_for('logout') }}">Выйти</a>
+
+{% endblock %}

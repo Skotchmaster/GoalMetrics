@@ -1,1 +1,2 @@
-# GoalMetrics-site
+# GoalMetrics
+[xeq](#GoalMetrics)

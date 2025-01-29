@@ -2,20 +2,10 @@ import requests
 from collections import defaultdict
 from lxml import html
 import pymysql
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from config import host, user, password, db_name
 
-def get_connection():
-    connection = pymysql.connect(
-        host=host,
-        port=3306,
-        user=user,
-        password=password,
-        database=db_name,
-        cursorclass=pymysql.cursors.DictCursor
-    )
-    return connection
 
 
 def fetch_html_content(url):
@@ -51,22 +41,22 @@ def get_data(date):
             competition_name = tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[@class="block_header"]//div[@class="img16"]//span/text()')[0]
             if check_competition(competition_img, competition_name) is not False:
                 index_of_game = 1
-                while tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[@class="game_block"][{index_of_game}]'):
-                    status = tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[@class="game_block"][{index_of_game}]//div[@class="status"]//span/text()')
+                while tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[contains(@class, "game_block")][{index_of_game}]'):
+                    status = tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[contains(@class, "game_block")][{index_of_game}]//div[@class="status"]//span/text()')
                     if not status:
-                        status = tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[@class="game_block"][{index_of_game}]//div[@class="status"]/text()')
+                        status = tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[contains(@class, "game_block")][{index_of_game}]//div[@class="status"]/text()')
                     status = status[0]
-                    first_team = tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[@class="game_block"][{index_of_game}]//div[@class="result"]//div[@class="ht"]//div[@class="name"]//span/text()')[0]
+                    first_team = tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[contains(@class, "game_block")][{index_of_game}]//div[@class="result"]//div[@class="ht"]//div[@class="name"]//span/text()')[0]
                     first_team_img = tree.xpath(
-                        f'//div[@class="live_comptt_bd"][{index}]//div[@class="game_block"][{index_of_game}]//div[@class="ht"]//div[@class="name"]//img/@src')[0]
+                        f'//div[@class="live_comptt_bd"][{index}]//div[contains(@class, "game_block")][{index_of_game}]//div[@class="ht"]//div[@class="name"]//img/@src')[0]
                     second_team = tree.xpath(
-                        f'//div[@class="live_comptt_bd"][{index}]//div[@class="game_block"][{index_of_game}]//div[@class="result"]//div[@class="at"]//div[@class="name"]//span/text()')[0]
+                        f'//div[@class="live_comptt_bd"][{index}]//div[contains(@class, "game_block")][{index_of_game}]//div[@class="result"]//div[@class="at"]//div[@class="name"]//span/text()')[0]
                     second_team_img = tree.xpath(
-                        f'//div[@class="live_comptt_bd"][{index}]//div[@class="game_block"][{index_of_game}]//div[@class="result"]//div[@class="at"]//div[@class="name"]//img/@src')[0]
+                        f'//div[@class="live_comptt_bd"][{index}]//div[contains(@class, "game_block")][{index_of_game}]//div[@class="result"]//div[@class="at"]//div[@class="name"]//img/@src')[0]
                     goals_first = tree.xpath(
-                        f'//div[@class="live_comptt_bd"][{index}]//div[@class="game_block"][{index_of_game}]//div[@class="result"]//div[@class="ht"]//div[@class="gls"]/text()')[0]
-                    goals_second = tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[@class="game_block"][{index_of_game}]//div[@class="result"]//div[@class="at"]//div[@class="gls"]/text()')[0]
-                    tour = tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[@class="game_block"][{index_of_game}]//div[@class="stage"]/text()')[0]
+                        f'//div[@class="live_comptt_bd"][{index}]//div[contains(@class, "game_block")][{index_of_game}]//div[@class="result"]//div[@class="ht"]//div[@class="gls"]/text()')[0]
+                    goals_second = tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[contains(@class, "game_block")][{index_of_game}]//div[@class="result"]//div[@class="at"]//div[@class="gls"]/text()')[0]
+                    tour = tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[contains(@class, "game_block")][{index_of_game}]//div[@class="stage"]/text()')[0]
                     results[check_competition(competition_img, competition_name)[0]].append([date, tour, status, first_team, first_team_img, second_team, second_team_img, goals_first + ":" + goals_second])
                     index_of_game += 1
     print(results)
@@ -146,10 +136,18 @@ create_main_page(connection, """
 def add_data():
     connection = create_db_connection()
     current_date = datetime.now().date()
+    previous_date = current_date - timedelta(days=1)
     all_data = get_data(current_date)
+    previous_data = get_data(previous_date)
 
     for competition in all_data.keys():
         for game in all_data[competition]:
+            game_data = game
+            game_data.insert(1, competition)
+            insert_data_in_main_page(connection, game_data)
+
+    for competition in previous_data.keys():
+        for game in previous_data[competition]:
             game_data = game
             game_data.insert(1, competition)
             insert_data_in_main_page(connection, game_data)

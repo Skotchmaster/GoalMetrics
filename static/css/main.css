@@ -241,7 +241,6 @@ a:hover {
     border-radius: 8px;
 }
 
-/* Элементы управления */
 .sc-controls {
     margin: 15px 0;
     display: flex;
@@ -265,7 +264,6 @@ a:hover {
     cursor: pointer;
 }
 
-/* Таблица календаря */
 .sc-calendar-table {
     width: 100%;
     border-collapse: collapse;
@@ -286,7 +284,6 @@ a:hover {
     position: relative;
 }
 
-/* Дни */
 .sc-day-link {
     display: block;
     color: #212529;
@@ -308,16 +305,122 @@ a:hover {
     color: #dc3545;
 }
 
-/* Текущий день */
 .sc-current-day {
     background: #4CAF50;
     color: white !important;
 }
 
-/* Заголовок месяца */
 .sc-month-title {
     color: #2c3e50;
     text-align: center;
     margin: 15px 0;
     font-size: 1.5em;
+}
+
+.form-container {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-container h2 {
+    text-align: center;
+    color: #d94537;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-container input[type="text"]:focus,
+.form-container input[type="password"]:focus {
+    outline: none;
+    border-color: #d94537;
+    box-shadow: 0 0 5px rgba(217, 69, 55, 0.3);
+}
+
+.form-container input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #d94537;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-container input[type="submit"]:hover {
+    background-color: #b0352c;
+}
+
+.form-container input[type="submit"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(217, 69, 55, 0.3);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #d94537;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+    background-color: #b0352c;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.register-link a {
+    color: #d94537;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
 }

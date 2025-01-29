@@ -3,6 +3,7 @@ from collections import defaultdict
 from config import host, user, password, db_name
 import re
 
+
 def get_connection():
     return pymysql.connect(
         host=host,
@@ -188,3 +189,8 @@ def main_page_bd(date):
         return {}
     finally:
         connection.close()
+
+connection = get_connection()
+with connection.cursor() as cursor:
+    cursor.execute("INSERT INTO users (name, password) VALUES (%s, %s)", ("username", "password"))
+    cursor.close()
