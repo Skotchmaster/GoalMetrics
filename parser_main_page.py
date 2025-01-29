@@ -59,7 +59,6 @@ def get_data(date):
                     tour = tree.xpath(f'//div[@class="live_comptt_bd"][{index}]//div[contains(@class, "game_block")][{index_of_game}]//div[@class="stage"]/text()')[0]
                     results[check_competition(competition_img, competition_name)[0]].append([date, tour, status, first_team, first_team_img, second_team, second_team_img, goals_first + ":" + goals_second])
                     index_of_game += 1
-    print(results)
     return results
 
 def create_db_connection():
@@ -115,24 +114,6 @@ create_main_page(connection, """
                 """)
 
 
-# def generate_date_range_and_parse(start_date, end_date):
-#     current_date = start_date
-#     while current_date <= end_date:
-#         all_data = get_data(current_date.strftime('%Y-%m-%d'))
-#         for competition in all_data.keys():
-#             for game in all_data[competition]:
-#                 game_data = game
-#                 game_data.insert(1, competition)
-#                 insert_data_in_main_page(connection, game_data)
-#         current_date += timedelta(days=1)
-#
-# start_date = datetime(2024, 6, 1).date()
-# end_date = datetime(2025, 1, 28).date()
-#
-# generate_date_range_and_parse(start_date, end_date)
-
-
-
 def add_data():
     connection = create_db_connection()
     current_date = datetime.now().date()
@@ -151,3 +132,5 @@ def add_data():
             game_data = game
             game_data.insert(1, competition)
             insert_data_in_main_page(connection, game_data)
+
+print("vd")

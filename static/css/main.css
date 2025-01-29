@@ -424,3 +424,8 @@ a:hover {
 .register-link a:hover {
     text-decoration: underline;
 }
+
+button {
+    margin-top: 20px;
+    margin-left: 20px;
+}

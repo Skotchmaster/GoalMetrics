@@ -92,7 +92,6 @@ def login():
 @login_required
 def dashboard(user_id):
     if current_user.id != user_id:
-        flash("Вы не можете просматривать чужие страницы!", "danger")
         return redirect(url_for('dashboard', user_id=current_user.id))
 
     return render_template('dashboard.html', user=current_user)
@@ -101,7 +100,6 @@ def dashboard(user_id):
 @login_required
 def logout():
     logout_user()
-    flash('Вы вышли из системы!', 'info')
     return redirect(url_for('login'))
 
 @app.route('/<string:league>/<string:year>')
